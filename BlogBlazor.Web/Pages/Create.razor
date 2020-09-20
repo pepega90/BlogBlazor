@@ -1,0 +1,37 @@
+﻿@page "/createpost"
+@inherits CreateBase
+@attribute [Authorize]
+
+<h3 class="mb-4">Create Post</h3>
+
+<EditForm Model="Post" OnValidSubmit="CreatePost">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="title">Judul Post</label>
+        <InputText @bind-Value="Post.Title" id="title" placeholder="Title Post" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="summary">Summary Post</label>
+        <InputText @bind-Value="Post.Summary" id="summary" placeholder="Summary Post" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="body">Isi Post</label>
+        <InputTextArea @bind-Value="Post.Body" class="form-control" id="body" placeholder="Body Post" />
+    </div>
+    <div class="form-group">
+        <label for="kategori">Kategori</label>
+        <CustomInputSelect id="kategori" class="form-control" @bind-Value="Post.KategoriId">
+            <option>-- Pilih Kategori --</option>
+            @foreach (var item in Kategoris)
+            {
+                <option value="@item.Id">@item.KategoriName</option>
+            }
+        </CustomInputSelect>
+    </div>
+    <div class="form-group">
+        <label for="author">Author</label>
+        <InputText @bind-Value="Post.Author" id="author" placeholder="Author Post" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>

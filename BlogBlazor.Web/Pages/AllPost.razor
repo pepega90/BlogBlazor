@@ -1,0 +1,35 @@
+﻿@page "/"
+@inherits AllPostBase
+
+<h3 class="mb-3">All Post</h3>
+<input class="form-control mb-4" @onchange="CariPost" placeholder="Cari Post..." />
+<label for="kategori">Cari berdasarkan kategori:</label>
+<select @onchange="CariByKategori" id="kategori" class="form-control mb-2">
+    <option>-- Kategori --</option>
+    @foreach (var item in listKategori)
+    {
+        <option value="@item.KategoriName">@item.KategoriName</option>
+    }
+</select>
+
+@if (Posts == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    if (httpMsg.IsSuccessStatusCode)
+    {
+        <div class="row">
+            @foreach (var item in Posts)
+            {
+                <Post SinglePost="item" OnDeletePost="DeletePost" />
+            }
+        </div>
+    }
+    else
+    {
+        <h1 class="display-4">Maaf, post yang anda cari tidak ditemukan</h1>
+        <button @onclick="backHome" class="btn btn-sm btn-outline-primary">Klik untuk menampilkan kembali post</button>
+    }
+}

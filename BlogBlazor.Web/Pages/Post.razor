@@ -1,0 +1,22 @@
+﻿@inherits PostBase
+
+<div class="col-md-12 mb-3">
+    <div class="card">
+        @*<img src="..." class="card-img-top" alt="...">*@
+        <div class="card-body">
+            <h5 class="card-title">@SinglePost.Title</h5>
+            <p class="card-text"><b>Author</b>: @SinglePost.Author</p>
+            <p class="card-text">Category: @SinglePost.Kategori.KategoriName</p>
+            <p class="card-text">@SinglePost.Summary</p>
+            <a href="@($"/postdetails/{SinglePost.Id}")" class="btn btn-primary">Read More</a>
+            <AuthorizeView>
+                <Authorized>
+                    <button type="button" @onclick="ShowModalDelete" class="btn btn-danger">Delete</button>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+    </div>
+</div>
+<Confirm @ref="DeleteConfirmation"
+         ConfirmationChanged="ConfirmDelete"
+         ConfirmationMessage="@($"Apakah anda yaking ingin menghapus post \"{SinglePost.Title}\" ?")" />

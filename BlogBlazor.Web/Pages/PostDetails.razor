@@ -1,0 +1,16 @@
+﻿@page "/postdetails/{Id}"
+@inherits PostDetailsBase
+
+<h3>@Post.Title</h3>
+<p><b>Author:</b> @Post.Author</p>
+
+<div class="mb-5">
+    <p>
+        @Post.Body
+    </p>
+</div>
+<AuthorizeView>
+    <Authorized>
+        <a href="@($"/editpost/{Post.Id}")" class="btn btn-success">Edit Post</a>
+    </Authorized>
+</AuthorizeView>
